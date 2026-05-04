@@ -93,6 +93,21 @@ services:
     networks:
       - microservices
 
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - user-service
+      - order-service
+      - notification-service
+    restart: on-failure
+    networks:
+      - microservices
+
 volumes:
   mysql_data:
 
